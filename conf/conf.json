@@ -1,0 +1,7 @@
+{
+  "hostname": "127.0.0.1",
+  "port": "7474",
+  "path": "/db/data/transaction/commit",
+  "username": "your username",
+  "password": "your password"
+}
