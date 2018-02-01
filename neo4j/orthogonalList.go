@@ -138,3 +138,33 @@ func (v *VertexNode) findEdge(tailVex, headVex int) *EdgeNode {
 	}
 	return want
 }
+
+// DFS -
+func (l *OrthogonalList) DFS(i int, visited *map[int]bool) {
+	if !(*visited)[i] {
+		(*visited)[i] = true
+	}
+
+	e := l.VexList[i].FirstOut
+	for e != nil {
+		if !(*visited)[e.HeadVex] {
+			l.DFS(e.HeadVex, visited)
+		}
+		e = e.TailLink
+	}
+}
+
+// DFSTraverse -
+func (l *OrthogonalList) DFSTraverse(i int, visited *map[int]bool) {
+	if !(*visited)[i] {
+		(*visited)[i] = true
+	}
+
+	e := l.VexList[i].FirstIn
+	for e != nil {
+		if !(*visited)[e.TailVex] {
+			l.DFSTraverse(e.TailVex, visited)
+		}
+		e = e.HeadLink
+	}
+}
