@@ -38,18 +38,22 @@ type OrthogonalList struct {
 // 	{0, 0, 0, 0},
 // }
 
-var nodes = []int{0, 1, 2, 3}
+var nodes = []int{0, 1, 2, 3, 4, 5}
 var outRels = [][]int{
 	{3},    // 0
 	{0, 2}, // 1
 	{1, 0}, // 2
 	{},     // 3
+	{5},    // 4
+	{},     // 5
 }
 var inRels = [][]int{
 	{1, 2}, // 0
 	{2},    // 1
 	{1},    // 2
 	{0},    // 3
+	{},     // 4
+	{4},    // 5
 }
 
 // CreateGraph -
@@ -155,7 +159,16 @@ func (l *OrthogonalList) DFS(i int, visited *map[int]bool) {
 }
 
 // DFSTraverse -
-func (l *OrthogonalList) DFSTraverse(i int, visited *map[int]bool) {
+func (l *OrthogonalList) DFSTraverse() map[int]bool {
+	visited := make(map[int]bool)
+	for i := 0; i < l.numNodes; i++ {
+		l.DFS(i, &visited)
+	}
+	return visited
+}
+
+// DFSReverse -
+func (l *OrthogonalList) DFSReverse(i int, visited *map[int]bool) {
 	if !(*visited)[i] {
 		(*visited)[i] = true
 	}
@@ -163,7 +176,7 @@ func (l *OrthogonalList) DFSTraverse(i int, visited *map[int]bool) {
 	e := l.VexList[i].FirstIn
 	for e != nil {
 		if !(*visited)[e.TailVex] {
-			l.DFSTraverse(e.TailVex, visited)
+			l.DFSReverse(e.TailVex, visited)
 		}
 		e = e.HeadLink
 	}

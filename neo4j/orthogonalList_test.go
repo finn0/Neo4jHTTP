@@ -17,22 +17,16 @@ func TestOrthogonalList(t *testing.T) {
 }
 
 func TestOrthogonalListDFS(t *testing.T) {
-	visited := make(map[int]bool)
 	l := CreateGraph()
-
-	for i := 0; i < l.numNodes; i++ {
-		l.DFS(i, &visited)
-	}
-
-	fmt.Printf("%v\n", visited)
+	fmt.Printf("%v\n", l.DFSTraverse())
 }
 
-func TestOrthogonalListDFSTraverse(t *testing.T) {
+func TestOrthogonalListDFSReverse(t *testing.T) {
 	visited := make(map[int]bool)
 	l := CreateGraph()
 
 	for i := 0; i < l.numNodes; i++ {
-		l.DFSTraverse(i, &visited)
+		l.DFSReverse(i, &visited)
 	}
 	fmt.Printf("%v\n", visited)
 }
